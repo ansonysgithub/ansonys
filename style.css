@@ -1,0 +1,140 @@
+/*
+Theme name: Ansonys
+Version: 1.0
+Description: Porfolio website for Ansony
+Author: Ansony
+Authon URI: https://github.com/ansonysgithub
+License: GNU General Public Licence v2 or later
+License: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+* {
+  font-family: "montserrat", sans-serif;
+}
+
+header {
+  background-color: rgb(51, 51, 51);
+}
+
+header nav ul {
+  margin: 15px;
+  padding: 0;
+}
+
+header nav li {
+  list-style: none;
+  display: inline-block;
+  padding: 0 15px;
+}
+header nav li a {
+  color: #fff;
+  text-transform: uppercase;
+}
+header nav li a:hover {
+  color: #fff;
+}
+
+body {
+  margin: 0 auto;
+  width: 80%;
+  padding: 10px;
+}
+
+/* Create three equal columns that floats next to each other */
+
+.column {
+  float: left;
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+/* Clear floats after the columns */
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+footer {
+  height: 5em;
+  background-color: rgb(51, 51, 51);
+}
+
+footer p {
+  color: white !important;
+  text-align: center;
+  text-justify: newspaper;
+}
+
+footer p a {
+  color: rgb(109, 176, 233) !important;
+  border: none;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+
+@media screen and (max-width: 600px) {
+  body {
+    width: 100%;
+    padding: none;
+  }
+  .column {
+    width: 100%;
+  }
+}
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
+
+/* TEAM MEMBER NAME */
+
+h1 {
+  font-size: 3.75em;
+  font-weight: 700;
+  letter-spacing: 2px;
+  width: 60%;
+  margin: 45px auto 45px;
+}
+
+/* MEMBER 80% TITLE */
+
+h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.25em;
+}
+
+p {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  margin: 20px 0;
+  font-weight: 350;
+  padding: 15px;
+  text-align: justify;
+}
+
+.learn-more {
+  text-decoration: none;
+  border-style: none none solid;
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 20px;
+  font-weight: 700;
+  padding: 0;
+  color: black;
+}
+
+.learn-more:hover {
+  text-decoration: none;
+  border-style: none none solid;
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 20px;
+  font-weight: 700;
+  padding: 0;
+  color: black;
+}
