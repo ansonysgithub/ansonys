@@ -73,3 +73,21 @@ function products_type()
 }
 
 add_action('init', 'products_type');
+
+function a_register_taxonomy()
+{
+    $args = array(
+        'hierarchical' => true,
+        'labels' => array(
+            'name' => 'Product Categories',
+            'singular_name' => 'Product Category'
+        ),
+        'show_in_nav_menus' => true,
+        'show_admin_column' => true,
+        'rewrite' => array('slug' => 'category-product')
+    );
+
+    register_taxonomy('category-product', array('product'), $args);
+}
+
+add_action('init', 'a_register_taxonomy');
