@@ -11,7 +11,17 @@
 
     <div class="product-list">
         <h2>My products: </h2>
-        <div class="row">
+
+        <select name="category-product" id="category-product" class="form-control">
+            <option value="">All categories</option>
+            <?php
+            foreach (get_terms('category-product') as $category) :
+            ?>
+                <option value="<?php echo $category->term_id; ?>"><?php echo $category->name; ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <div class="row" id="category_results">
             <?php
             $args = array(
                 'post_type' => 'product',

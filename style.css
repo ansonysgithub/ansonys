@@ -26,10 +26,12 @@ header nav li {
   display: inline-block;
   padding: 0 15px;
 }
+
 header nav li a {
   color: #fff;
   text-transform: uppercase;
 }
+
 header nav li a:hover {
   color: #fff;
 }
@@ -79,6 +81,7 @@ footer p a {
     width: 100%;
     padding: none;
   }
+
   .column {
     width: 100%;
   }

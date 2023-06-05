@@ -25,6 +25,9 @@ function assets()
     wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery', 'popper'), '4.4.1', true);
 
     wp_enqueue_script('custom', get_template_directory_uri() . '/assets/js/custom.js', '', '1.0', true);
+    wp_localize_script('custom', 'as', array(
+        'ajaxurl' => admin_url('admin-ajax.php')
+    ));
 }
 
 add_action('wp_enqueue_scripts', 'assets');
@@ -91,3 +94,44 @@ function a_register_taxonomy()
 }
 
 add_action('init', 'a_register_taxonomy');
+
+function an_filter_products()
+{
+    $args = array(
+        'post_type' => 'product',
+        'post_per_page' => -1,
+        'order' => 'ASC',
+        'orderby' => 'title'
+    );
+
+    if ($_POST['category']) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'category-product',
+                'field' => 'slug',
+                'terms' => $_POST['category']
+            )
+        );
+    }
+
+    $products = new WP_Query($args);
+
+    if ($products->have_posts()) {
+        $return = array();
+        while ($products->have_posts()) {
+            $products->the_post();
+            $return[] = array(
+                'image' => get_the_post_thumbnail(get_the_ID(), 'large'),
+                'link' => get_the_permalink(),
+                'title' => get_the_title()
+            );
+        }
+
+        wp_send_json($return);
+    } else {
+        wp_send_json_error('There are no products');
+    }
+}
+
+add_action('wp_ajax_nopriv_an_filter_products', 'an_filter_products');
+add_action('wp_ajax_an_filter_products', 'an_filter_products');

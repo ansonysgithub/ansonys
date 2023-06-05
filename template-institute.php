@@ -1,7 +1,6 @@
 <?php
 // Template Name: Institute Page
 get_header();
-
 $fields = get_fields();
 ?>
 
