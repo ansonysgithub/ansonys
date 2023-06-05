@@ -173,3 +173,36 @@ add_action('rest_api_init', function () {
         )
     );
 });
+
+function an_register_block()
+{
+    $assets = include_once get_template_directory() . '/blocks/build/index.asset.php';
+
+    wp_register_script(
+        'an-block',
+        get_template_directory_uri() . '/blocks/build/index.js',
+        $assets['dependencies'],
+        $assets['version']
+    );
+
+    register_block_type(
+        'an/block',
+        array(
+            'editor_script' => 'an-block',
+            'attributes' => array(
+                'content' => array(
+                    'type' => 'string',
+                    'default' => 'Hello World'
+                )
+            ),
+            'render_callback' => 'an_dynamic_block'
+        )
+    );
+}
+
+add_action('init', 'an_register_block');
+
+function an_dynamic_block($attributes, $content)
+{
+    return '<h2>' . $attributes['content'] . '</h2>';
+}
