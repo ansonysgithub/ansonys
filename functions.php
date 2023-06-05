@@ -26,7 +26,8 @@ function assets()
 
     wp_enqueue_script('custom', get_template_directory_uri() . '/assets/js/custom.js', '', '1.0', true);
     wp_localize_script('custom', 'as', array(
-        'ajaxurl' => admin_url('admin-ajax.php')
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'apiurl' => home_url('wp-json/news/v1/')
     ));
 }
 
@@ -135,3 +136,40 @@ function an_filter_products()
 
 add_action('wp_ajax_nopriv_an_filter_products', 'an_filter_products');
 add_action('wp_ajax_an_filter_products', 'an_filter_products');
+
+function news_lastest_api($data)
+{
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => $data['post_per_page'],
+        'order'     => 'ASC',
+        'orderby' => 'title'
+    );
+    $news = new WP_Query($args);
+
+    if ($news->have_posts()) {
+        while ($news->have_posts()) {
+            $news->the_post();
+            $response[] = array(
+                'image' => get_the_post_thumbnail(get_the_ID(), 'large'),
+                'link' => get_permalink(),
+                'title' => get_the_title()
+            );
+        }
+    } else {
+        return null;
+    }
+
+    return $response;
+}
+
+add_action('rest_api_init', function () {
+    register_rest_route(
+        'news/v1',
+        '/latest/(?P<post_per_page>\d+)',
+        array(
+            'methods' => 'GET',
+            'callback' => 'news_lastest_api'
+        )
+    );
+});

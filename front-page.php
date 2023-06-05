@@ -48,6 +48,13 @@
             wp_reset_postdata();
             ?>
         </div>
+
+        <div class="row">
+            <h3>Lastests news</h3>
+            <div class="lastest-posts" id="lastest-posts">
+
+            </div>
+        </div>
     </div>
 </main>
 
